@@ -8,8 +8,11 @@ int main(){
     //                  int     int         "String"
     InitWindow(windowWidth, windowHeight, "Nikita's Window");
 
-    while(true){
+    while(!WindowShouldClose()){
         BeginDrawing();
+
+        DrawCircle(windowWidth / 2, windowHeight / 2, 25, BLUE);
+
         ClearBackground(RED);
         EndDrawing();
     }

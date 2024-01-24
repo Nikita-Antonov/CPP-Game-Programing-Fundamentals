@@ -9,6 +9,8 @@ int main(){
     InitWindow(windowWidth, windowHeight, "Nikita's Window");
 
     while(true){
-        
+        BeginDrawing();
+        ClearBackground(RED);
+        EndDrawing();
     }
 }

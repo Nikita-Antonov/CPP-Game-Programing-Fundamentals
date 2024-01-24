@@ -22,16 +22,16 @@ int main(){
         //Draws Circle at the center of the screen
         DrawCircle(circle_x, circle_y, 25, BLUE);
 
-        if(IsKeyDown(KEY_D)){
+        if(IsKeyDown(KEY_D) && circle_x < windowWidth){
             circle_x = circle_x + 10;
         }
-        if(IsKeyDown(KEY_A)){
+        if(IsKeyDown(KEY_A) && circle_x > 0){
             circle_x = circle_x - 10;
         }
-        if(IsKeyDown(KEY_W)){
+        if(IsKeyDown(KEY_W) && circle_y > 0){
             circle_y = circle_y - 10;
         }
-        if(IsKeyDown(KEY_S)){
+        if(IsKeyDown(KEY_S)&& circle_y < windowHeight){
             circle_y = circle_y + 10;
         }
 

@@ -18,6 +18,10 @@ int main(){
 
     int posY {window_Height - height};
     int velocity {0};
+
+    bool isInAir {};
+    //jump velovity
+    const int jumpVel {-22};
     
     SetTargetFPS(60);
     while(!WindowShouldClose()){
@@ -31,14 +35,17 @@ int main(){
         if(posY >= window_Height - height){
             //Rectangle is on the ground
             velocity = 0;
+            isInAir = false;
         }
         else{
             //Rectangle is in the air
             velocity += gravity;
+            isInAir = true;
         }
 
-        if(IsKeyPressed(KEY_SPACE)){    //Subtracting to move up, because window is initialized from the top
-            velocity -= 10;
+        //Jump check
+        if(IsKeyPressed(KEY_SPACE) && !isInAir){    //Subtracting to move up, because window is initialized from the top AND checking if we are NOT in the air
+            velocity -= jumpVel;
         }
 
         //Update Position

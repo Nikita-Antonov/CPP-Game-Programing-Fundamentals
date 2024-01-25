@@ -33,42 +33,47 @@ int main(){
 
     int direction {10};
 
-    //Calc for circle hitbox
-
+    bool collision_with_axe {true};
 
     SetTargetFPS(60);
     while(!WindowShouldClose()){
         BeginDrawing();
+
         ClearBackground(WHITE);
 
-        //Game Logic Begins
+        if(collision_with_axe){
+            DrawText("Game Over", windowHeight / 2, windowWidth / 2, 20, RED);
+        }
+        else{
+            //Game Logic Begins
 
-        //Draws Circle at the center of the screen
-        DrawCircle(circle_x, circle_y, circle_radius, BLUE);
-        //Draws a Rectangle axe_x/y for the starting cords, with the width and height of axe_length and the color red
-        DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
+            //Draws Circle at the center of the screen
+            DrawCircle(circle_x, circle_y, circle_radius, BLUE);
+            //Draws a Rectangle axe_x/y for the starting cords, with the width and height of axe_length and the color red
+            DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
 
-        //Move the Axe
-        axe_y += direction;
-        //If the axe reaches the end of the windows height, then it will reverse the direction
-        if(axe_y > windowHeight || axe_y < 0){
-            direction = -direction;
-        }
+            //Move the Axe
+            axe_y += direction;
+            //If the axe reaches the end of the windows height, then it will reverse the direction
+            if(axe_y > windowHeight || axe_y < 0){
+                direction = -direction;
+            }
 
-        if(IsKeyDown(KEY_D) && circle_x < windowWidth){
-            circle_x += 10;
-        }
-        if(IsKeyDown(KEY_A) && circle_x > 0){
-            circle_x -= 10;
-        }
-        if(IsKeyDown(KEY_W) && circle_y > 0){
-            circle_y -= 10;
-        }
-        if(IsKeyDown(KEY_S)&& circle_y < windowHeight){
-            circle_y += 10;
-        }
+            if(IsKeyDown(KEY_D) && circle_x < windowWidth){
+                circle_x += 10;
+            }
+            if(IsKeyDown(KEY_A) && circle_x > 0){
+                circle_x -= 10;
+            }
+            if(IsKeyDown(KEY_W) && circle_y > 0){
+                circle_y -= 10;
+            }
+            if(IsKeyDown(KEY_S)&& circle_y < windowHeight){
+                circle_y += 10;
+            }
 
-        //Game Logic Ends
+            //Game Logic Ends
+        }
         EndDrawing();
     }
 }

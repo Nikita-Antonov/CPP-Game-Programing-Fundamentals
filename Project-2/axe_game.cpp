@@ -10,13 +10,31 @@ int main(){
 
     //Circle Coedinates
     int circle_x {200};
-    //int circle_x = (windowWidth / 2);
     int circle_y {200};
-    //int circle_y = (windowHeight / 2);
+    int circle_radius {25};
 
-    //"Axe" Cordinates
+    //circle edges
+    int l_circle_x {circle_x - circle_radius};
+    int r_circle_x {circle_x + circle_radius};
+    int u_circle_y {circle_y - circle_radius};
+    int b_circle_y {circle_y + circle_radius};
+    
+
+    //"Axe" Cordinates (The top left corner)
     int axe_x {400};
     int axe_y {0};
+    int axe_length {50};
+
+    //Axe Edges
+    int l_axe_x {axe_x};                //Left corner of the axe, is already at 0
+    int r_axe_x {axe_x + axe_length};
+    int u_axe_y {axe_y};                //Upper edge of the corner, is already the variable
+    int b_axe_y {axe_y + axe_length};
+
+    int direction {10};
+
+    //Calc for circle hitbox
+
 
     SetTargetFPS(60);
     while(!WindowShouldClose()){
@@ -26,12 +44,16 @@ int main(){
         //Game Logic Begins
 
         //Draws Circle at the center of the screen
-        DrawCircle(circle_x, circle_y, 25, BLUE);
-        //Draws a Rectangle axe_x/y for the starting cords, with the width and height of 50 and the color red
-        DrawRectangle(axe_x, axe_y, 50, 50, RED);
+        DrawCircle(circle_x, circle_y, circle_radius, BLUE);
+        //Draws a Rectangle axe_x/y for the starting cords, with the width and height of axe_length and the color red
+        DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
 
         //Move the Axe
-        axe_y += 10;
+        axe_y += direction;
+        //If the axe reaches the end of the windows height, then it will reverse the direction
+        if(axe_y > windowHeight || axe_y < 0){
+            direction = -direction;
+        }
 
         if(IsKeyDown(KEY_D) && circle_x < windowWidth){
             circle_x += 10;

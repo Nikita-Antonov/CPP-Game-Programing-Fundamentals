@@ -9,6 +9,9 @@ int main(){
     //Initialize the Window
     InitWindow(window_Width, window_Height, "Dapper Dasher");
 
+    //Acceleration due to gravity (pixles per frame, per frame)
+    const int gravity{1};
+
     //Rectangle Dimentions
     const int width {50};
     const int height {80};
@@ -23,10 +26,22 @@ int main(){
         //Clears Background
         ClearBackground(WHITE);
 
+
+        //Preform ground check
+        if(posY >= window_Height - height){
+            //Rectangle is on the ground
+            velocity = 0;
+        }
+        else{
+            //Rectangle is in the air
+            velocity += gravity;
+        }
+
         if(IsKeyPressed(KEY_SPACE)){    //Subtracting to move up, because window is initialized from the top
             velocity -= 10;
         }
 
+        //Update Position
         posY += velocity;
         
         DrawRectangle(window_Width/2, posY, width, height, BLUE);

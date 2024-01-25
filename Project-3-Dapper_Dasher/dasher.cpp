@@ -12,6 +12,10 @@ int main(){
     //Acceleration due to gravity (pixles per frame, per frame)
     const int gravity{1};
 
+    Texture2D scarfy = LoadTexture("textures/scarfy.png");
+    Rectangle scarfyRec;
+    Vector2 scarfyPos;
+
     //Rectangle Dimentions
     const int width {50};
     const int height {80};

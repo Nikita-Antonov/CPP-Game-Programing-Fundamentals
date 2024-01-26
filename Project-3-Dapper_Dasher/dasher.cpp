@@ -47,6 +47,9 @@ int main(){
     //Nebula x velocity (pixles per second)
     int nebVel {-200};
 
+    //Array of nebulae
+    AnimData nebulae[2] { nebData, neb2Data };
+
     //=====================================================================================
     //=============================|| Scarfy Variables ||==================================
     Texture2D scarfy = LoadTexture("textures/scarfy.png"); //Sprite Sheet is 1x6
@@ -100,10 +103,10 @@ int main(){
         //====================|| Position Updates ||=======================
 
         //Update Nebula Position
-        nebData.pos.x += nebVel * dt;
+        nebulae[0].pos.x += nebVel * dt;
 
         //Update Nebula 2 Position
-        neb2Data.pos.x += nebVel * dt;
+        nebulae[1].pos.x += nebVel * dt;
 
         //Update Scarfy Position
         scarfyData.pos.y += velocity * dt;
@@ -113,28 +116,28 @@ int main(){
         //============================|| Updating Animation ||=================================
 
         //Update Nebula Running time
-        nebData.runningTime += dt;
-        if(nebData.runningTime >= nebData.updateTime){
-            nebData.runningTime = 0.0;
+        nebulae[0].runningTime += dt;
+        if(nebulae[0].runningTime >= nebulae[0].updateTime){
+            nebulae[0].runningTime = 0.0;
 
             //Update Nebula Animation Frame
-            nebData.rec.x = nebData.frame * nebData.rec.width;
-            nebData.frame++;
-            if(nebData.frame > 7){
-                nebData.frame = 0;
+            nebulae[0].rec.x = nebulae[0].frame * nebulae[0].rec.width;
+            nebulae[0].frame++;
+            if(nebulae[0].frame > 7){
+                nebulae[0].frame = 0;
             }
         }
 
         //Update Nebula 2 Running time
-        neb2Data.runningTime += dt;
-        if(neb2Data.runningTime >= neb2Data.updateTime){
-            neb2Data.runningTime = 0.0;
+        nebulae[1].runningTime += dt;
+        if(nebulae[1].runningTime >= nebulae[1].updateTime){
+            nebulae[1].runningTime = 0.0;
 
             //Update Nebula Animation Frame
-            neb2Data.rec.x = neb2Data.frame * neb2Data.rec.width;
-            neb2Data.frame++;
-            if(neb2Data.frame > 7){
-                neb2Data.frame = 0;
+            nebulae[1].rec.x = nebulae[1].frame * nebulae[1].rec.width;
+            nebulae[1].frame++;
+            if(nebulae[1].frame > 7){
+                nebulae[1].frame = 0;
             }
         }
 

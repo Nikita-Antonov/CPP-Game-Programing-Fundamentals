@@ -1,5 +1,14 @@
 #include "raylib.h"
 
+struct AnimData
+{
+    Rectangle rec;
+    Vector2 pos;
+    int frame;
+    float updateTime;
+    float runningTime;
+};
+
 int main(){
 
     //Window Dimentions
@@ -15,6 +24,24 @@ int main(){
     //=====================================================================================
     //=============================|| Nebula Variables ||==================================
     Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png"); //Sprite Sheet is 8x8
+
+    //AnimData for Nebula
+    AnimData nebData { 
+        {0.0, 0.0, nebula.width/8, nebula.height/8},                //Rectangle Rec
+        {window_Width, window_Height - nebula.height/8},            //Vector2 Pos
+        0,                                                          //Int Frame
+        (1.0/12.0),                                                 //Float updateTime
+        0                                                           //Float runningTime
+    };
+
+    //AnimData for Nebula 2
+    AnimData neb2Data{
+        {0.0, 0.0, nebula.width/8, nebula.height/8},                //Rectangle Rec
+        {window_Width + 300, window_Height - (nebula.height/8)},    //Vector2 Pos
+        0,                                                          //Int Frame
+        (1.0/16.0),                                                 //Float updateTime
+        0                                                           //Float runningTime
+    };
 
     //Initialized on same line
     //                 x    y       Width           height
@@ -41,6 +68,17 @@ int main(){
     //=====================================================================================
     //=============================|| Scarfy Variables ||==================================
     Texture2D scarfy = LoadTexture("textures/scarfy.png"); //Sprite Sheet is 1x6
+
+    AnimData scarfyData;
+    scarfyData.rec.width = scarfy.width/6;
+    scarfyData.rec.height = scarfy.height;
+    scarfyData.rec.x = 0.0;
+    scarfyData.rec.y = 0.0;
+    scarfyData.pos.x = window_Width/2 - (scarfyData.rec.width/2);
+    scarfyData.pos.y = window_Height - (scarfyData.rec.height);
+    scarfyData.frame = 0;
+    scarfyData.updateTime = (1.0/12.0);
+    scarfyData.runningTime = 0.0;
 
     //Initialized on same line
     //                    x    y       Width           height

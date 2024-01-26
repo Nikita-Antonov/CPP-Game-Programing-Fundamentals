@@ -14,7 +14,14 @@ int main(){
 
     Texture2D scarfy = LoadTexture("textures/scarfy.png");
     Rectangle scarfyRec;
+    scarfyRec.width = scarfy.width/6;
+    scarfyRec.height = scarfy.height;
+    scarfyRec.x = 0;
+    scarfyRec.y = 0;
+
     Vector2 scarfyPos;
+    scarfyPos.x = window_Width/2 - (scarfyRec.width/2);
+    scarfyPos.y = window_Height - (scarfyRec.height);
 
     //Rectangle Dimentions
     const int width {50};

@@ -12,11 +12,12 @@ struct AnimData
 int main(){
 
     //Window Dimentions
-    const int window_Width {512};
-    const int window_Height {380};
+    int windowDimentions[2];
+    windowDimentions[0] = 512;  //Width
+    windowDimentions[1] = 380;  //Height
 
     //Initialize the Window
-    InitWindow(window_Width, window_Height, "Dapper Dasher");
+    InitWindow(windowDimentions[0], windowDimentions[1], "Dapper Dasher");
 
     //Acceleration due to gravity (pixles per second, per second)
     const int gravity{1'000};
@@ -27,20 +28,20 @@ int main(){
 
     //AnimData for Nebula
     AnimData nebData { 
-        {0.0, 0.0, nebula.width/8, nebula.height/8},                //Rectangle Rec
-        {window_Width, window_Height - nebula.height/8},            //Vector2 Pos
-        0,                                                          //Int Frame
-        (1.0/12.0),                                                 //Float updateTime
-        0                                                           //Float runningTime
+        {0.0, 0.0, nebula.width/8, nebula.height/8},                            //Rectangle Rec
+        {windowDimentions[0], windowDimentions[1] - nebula.height/8},           //Vector2 Pos
+        0,                                                                      //Int Frame
+        (1.0/12.0),                                                             //Float updateTime
+        0                                                                       //Float runningTime
     };
 
     //AnimData for Nebula 2
     AnimData neb2Data{
-        {0.0, 0.0, nebula.width/8, nebula.height/8},                //Rectangle Rec
-        {window_Width + 300, window_Height - nebula.height/8},      //Vector2 Pos
-        0,                                                          //Int Frame
-        (1.0/16.0),                                                 //Float updateTime
-        0                                                           //Float runningTime
+        {0.0, 0.0, nebula.width/8, nebula.height/8},                            //Rectangle Rec
+        {windowDimentions[0] + 300, windowDimentions[1] - nebula.height/8},     //Vector2 Pos
+        0,                                                                      //Int Frame
+        (1.0/16.0),                                                             //Float updateTime
+        0                                                                       //Float runningTime
     };
 
     //Nebula x velocity (pixles per second)
@@ -51,11 +52,11 @@ int main(){
     Texture2D scarfy = LoadTexture("textures/scarfy.png"); //Sprite Sheet is 1x6
 
     AnimData scarfyData {
-        {0.0, 0.0, scarfy.width/6, scarfy.height},                                              //Rectangle Rec
-        {window_Width/2 - (scarfyData.rec.width/2), window_Height - (scarfyData.rec.height)},   //Vector2 Pos
-        0,                                                                                      //Int Frame
-        (1.0/12.0),                                                                             //FLoat updateTime
-        0                                                                                       //Float runningTime
+        {0.0, 0.0, scarfy.width/6, scarfy.height},                                                          //Rectangle Rec
+        {windowDimentions[0]/2 - (scarfyData.rec.width/2), windowDimentions[1] - (scarfyData.rec.height)},  //Vector2 Pos
+        0,                                                                                                  //Int Frame
+        (1.0/12.0),                                                                                         //FLoat updateTime
+        0                                                                                                   //Float runningTime
     };
 
     //=====================================================================================
@@ -79,7 +80,7 @@ int main(){
 
 
         //Preform ground check
-        if(scarfyData.pos.y >= window_Height - scarfyData.rec.height){
+        if(scarfyData.pos.y >= windowDimentions[1] - scarfyData.rec.height){
             //Rectangle is on the ground
             velocity = 0;
             isInAir = false;

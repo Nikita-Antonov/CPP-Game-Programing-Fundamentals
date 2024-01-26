@@ -23,6 +23,12 @@ int main(){
     scarfyPos.x = window_Width/2 - (scarfyRec.width/2);
     scarfyPos.y = window_Height - (scarfyRec.height);
 
+    //Animation Frame
+    int frame {};
+    //Ammount of time before we updat the animation frame
+    const float updateTime {1.0/12.0};
+    float runningTime {0};
+
     int velocity {0};
 
     bool isInAir {};
@@ -53,8 +59,6 @@ int main(){
             isInAir = true;
         }
 
-
-
         //Jump check
         if(IsKeyPressed(KEY_SPACE) && !isInAir){    //Addint the negative jump vel, because window is initialized from the top AND checking if we are NOT in the air
             velocity += jumpVel;
@@ -63,6 +67,19 @@ int main(){
         //Update Position
         scarfyPos.y += velocity * dt;
         
+        //Update running time
+        runningTime += dt;
+        if(runningTime >= updateTime){
+            runningTime = 0.0;
+
+            //Update Animation Frame
+            scarfyRec.x = frame * scarfyRec.width;
+            frame++;
+            if(frame > 5){
+                frame = 0;
+            }
+        }
+
         DrawTextureRec(scarfy, scarfyRec, scarfyPos, WHITE);
 
         //Stop Drawing

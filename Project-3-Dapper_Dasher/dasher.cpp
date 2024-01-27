@@ -13,6 +13,22 @@ bool isOnGround(AnimData data, int windowHeight){
     return data.pos.y >= windowHeight - data.rec.height;
 }
 
+AnimData updateAnimData(AnimData data, float deltaTime, int maxFrame){
+    //Update Running time
+    data.runningTime += deltaTime;
+    if(data.runningTime >= data.updateTime){
+        data.runningTime = 0.0;
+        //Update Animation Frame
+        data.rec.x = data.frame * data.rec.width;
+        data.frame++;
+        if(data.frame > maxFrame){
+            data.frame = 0;
+        }
+    }
+
+    return data;
+}
+
 int main(){
 
     //Window Dimentions
@@ -68,6 +84,10 @@ int main(){
     bool isInAir {};
     //jump velocity (Pixles Per second)
     const int jumpVel {-600};
+
+    //Background Texture
+    Texture2D background = LoadTexture("textures/far-buildings.png");
+    float bgX {0};
     
     SetTargetFPS(60);
     while(!WindowShouldClose()){
@@ -79,6 +99,13 @@ int main(){
         BeginDrawing();
         //Clears Background
         ClearBackground(WHITE);
+
+        //Update Background X posituion
+        bgX -= 20 * dt;
+
+        //Draw Background
+        Vector2 bgPos {bgX, 0.0};
+        DrawTextureEx(background, bgPos, 0.0, 2.0, WHITE);
 
 
         //Preform ground check
@@ -113,34 +140,12 @@ int main(){
         //============================|| Updating Animation ||=================================
 
         for(int i = 0; i < sizeOfNebulae; i++){
-            //Update Nebula Running time
-            nebulae[i].runningTime += dt;
-            if(nebulae[i].runningTime >= nebulae[i].updateTime){
-                nebulae[i].runningTime = 0.0;
-
-                //Update Nebula Animation Frame
-                nebulae[i].rec.x = nebulae[i].frame * nebulae[i].rec.width;
-                nebulae[i].frame++;
-                if(nebulae[i].frame > 7){
-                    nebulae[i].frame = 0;
-                }
-            }
+            nebulae[i] = updateAnimData(nebulae[i], dt, 8);
         }
 
         //Air Check for Scarfy Animation
         if(!isInAir){
-            //Update Scarfy running time
-            scarfyData.runningTime += dt;
-            if(scarfyData.runningTime >= scarfyData.updateTime){
-                scarfyData.runningTime = 0.0;
-
-                //Update Scarfy Animation Frame
-                scarfyData.rec.x = scarfyData.frame * scarfyData.rec.width;
-                scarfyData.frame++;
-                if(scarfyData.frame > 5){
-                    scarfyData.frame = 0;
-                }
-            }
+            scarfyData = updateAnimData(scarfyData, dt, 5);
         }
         //=====================================================================================
         
@@ -159,6 +164,8 @@ int main(){
     UnloadTexture(scarfy);
     //Unloads the Nebula Texture
     UnloadTexture(nebula);
+    //Unloads the Background
+    UnloadTexture(background);
 
     CloseWindow();
 

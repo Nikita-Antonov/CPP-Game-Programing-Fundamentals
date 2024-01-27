@@ -102,10 +102,15 @@ int main(){
 
         //Update Background X posituion
         bgX -= 20 * dt;
+        if(bgX <= -background.width*2){
+            bgX = 0.0;
+        }
 
-        //Draw Background
-        Vector2 bgPos {bgX, 0.0};
-        DrawTextureEx(background, bgPos, 0.0, 2.0, WHITE);
+        //Draw Background, 2 individual textures, slideing
+        Vector2 bg1Pos {bgX, 0.0};
+        DrawTextureEx(background, bg1Pos, 0.0, 2.0, WHITE);
+        Vector2 bg2Pos {bgX + background.width*2, 0.0};
+        DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
 
 
         //Preform ground check

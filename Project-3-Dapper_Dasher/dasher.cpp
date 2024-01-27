@@ -87,7 +87,15 @@ int main(){
 
     //Background Texture
     Texture2D background = LoadTexture("textures/far-buildings.png");
-    float bgX {0};
+    float bgX {};
+
+    //Midground Texture
+    Texture2D midground = LoadTexture("textures/back-buildings.png");
+    float mgX {};
+
+    //Foreground Texture
+    Texture2D foreground = LoadTexture("textures/foreground.png");
+    float fgX {};
     
     SetTargetFPS(60);
     while(!WindowShouldClose()){
@@ -102,8 +110,18 @@ int main(){
 
         //Update Background X posituion
         bgX -= 20 * dt;
+        mgX -= 40 * dt;
+        fgX -= 80 * dt;
+
+        //Resets the texture x posiition when they reach the end of the screen
         if(bgX <= -background.width*2){
             bgX = 0.0;
+        }
+        if(mgX <= -midground.width*2){
+            mgX = 0.0;
+        }
+        if(fgX <= -foreground.width*2){
+            fgX = 0.0f;
         }
 
         //Draw Background, 2 individual textures, slideing
@@ -111,6 +129,19 @@ int main(){
         DrawTextureEx(background, bg1Pos, 0.0, 2.0, WHITE);
         Vector2 bg2Pos {bgX + background.width*2, 0.0};
         DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
+
+        //Draw Midground, 2 individual textures, slideing
+        Vector2 mg1Pos {mgX, 0.0};
+        DrawTextureEx(midground, mg1Pos, 0.0, 2.0, WHITE);
+        Vector2 mg2Pos {mgX + background.width*2, 0.0};
+        DrawTextureEx(midground, mg2Pos, 0.0, 2.0, WHITE);
+
+        //Draw Foreground, 2 individual textures, slideing
+        Vector2 fg1Pos {fgX, 0.0};
+        DrawTextureEx(foreground, fg1Pos, 0.0, 2.0, WHITE);
+        Vector2 fg2Pos {fgX + background.width*2, 0.0};
+        DrawTextureEx(foreground, fg2Pos, 0.0, 2.0, WHITE);
+        
 
 
         //Preform ground check
@@ -171,6 +202,10 @@ int main(){
     UnloadTexture(nebula);
     //Unloads the Background
     UnloadTexture(background);
+    //Unloads the Midground
+    UnloadTexture(midground);
+    //Unloads the Foreground
+    UnloadTexture(foreground);
 
     CloseWindow();
 

@@ -9,6 +9,10 @@ struct AnimData
     float runningTime;
 };
 
+bool isOnGround(AnimData data, int windowHeight){
+    return data.pos.y >= windowHeight - data.rec.height;
+}
+
 int main(){
 
     //Window Dimentions
@@ -78,7 +82,7 @@ int main(){
 
 
         //Preform ground check
-        if(scarfyData.pos.y >= windowDimentions[1] - scarfyData.rec.height){
+        if(isOnGround(scarfyData, windowDimentions[1])){
             //Rectangle is on the ground
             velocity = 0;
             isInAir = false;

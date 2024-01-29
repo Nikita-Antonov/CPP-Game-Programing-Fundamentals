@@ -99,6 +99,8 @@ int main(){
     Texture2D foreground = LoadTexture("textures/foreground.png");
     float fgX {};
     
+    bool collision {};
+
     SetTargetFPS(60);
     while(!WindowShouldClose()){
 
@@ -190,14 +192,44 @@ int main(){
         }
         //=====================================================================================
         
-        //Draws Nebulae
-        for(int i = 0; i < sizeOfNebulae; i++){
-            DrawTextureRec(nebula, nebulae[i].rec, nebulae[i].pos, WHITE);
+        //Collision Check
+        for(AnimData nebula : nebulae){
+
+            //Padding to adjust for the sprite padding in nebula
+            float pad{50};
+            Rectangle nebRec{
+                nebula.pos.x + pad,
+                nebula.pos.y + pad,
+                nebula.rec.width - 2*pad,
+                nebula.rec.height - 2*pad
+            };
+
+            Rectangle scarfyRec{
+                scarfyData.pos.x,
+                scarfyData.pos.y,
+                scarfyData.rec.width,
+                scarfyData.rec.height
+            };
+
+            if(CheckCollisionRecs(nebRec, scarfyRec)){
+                collision = true;
+            }
         }
+        
+        if(collision){
+            //Hit a nebula, loses the game
+        }
+        else{
+            //No collition detected, continue drawing the texture
 
-        //Draw Scarfy
-        DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+            //Draws Nebulae
+            for(int i = 0; i < sizeOfNebulae; i++){
+                DrawTextureRec(nebula, nebulae[i].rec, nebulae[i].pos, WHITE);
+            }
 
+            //Draw Scarfy
+            DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+        }
         //Stop Drawing
         EndDrawing();
     }

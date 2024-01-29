@@ -65,6 +65,8 @@ int main(){
         nebulae[i].pos.x = windowDimentions[0] + (i * 300);
     }
 
+    float finishLine {nebulae[sizeOfNebulae - 1].pos.x};
+
     //=====================================================================================
     //=============================|| Scarfy Variables ||==================================
     Texture2D scarfy = LoadTexture("textures/scarfy.png"); //Sprite Sheet is 1x6
@@ -168,6 +170,9 @@ int main(){
         for(int i = 0; i < sizeOfNebulae; i++){
             nebulae[i].pos.x += nebVel * dt;
         }
+
+        //Update Finish Line
+        finishLine += nebVel * dt;
 
         //Update Scarfy Position
         scarfyData.pos.y += velocity * dt;

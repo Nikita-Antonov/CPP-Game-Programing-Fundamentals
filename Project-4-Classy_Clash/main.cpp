@@ -14,7 +14,14 @@ int main(){
     Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
     Vector2 mapPos {0.0, 0.0};
 
+    //Charecter speed
     float speed {4.0};
+
+    Texture2D knight = LoadTexture("charecters/knight_idle_spritesheet.png");
+    Vector2 knightPos {
+        (float)windowWidth/2.0f - (4.0f * (0.5f * (float)knight.width/6.0f)),
+        (float)windowHeight/2.0f - (4.0f * (0.5f * (float)knight.height))
+    };
 
     //Main Game Loop
     SetTargetFPS(60);
@@ -37,6 +44,12 @@ int main(){
 
         //Draw the map to screen
         DrawTextureEx(map, mapPos, 0.0, 4.0, WHITE);
+
+        //Draw the Charecter
+        Rectangle source {0.0f, 0.0f, (float)knight.width/6.0f, (float)knight.height};
+        Rectangle dest {knightPos.x, knightPos.y, 4.0f * (float)knight.width/6.0f, 4.0f * (float)knight.height};
+
+        DrawTexturePro(knight, source, dest, Vector2 {},0.0f, WHITE);
 
         //End Drawing
         EndDrawing();

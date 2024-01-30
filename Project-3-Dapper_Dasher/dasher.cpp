@@ -50,7 +50,8 @@ int main(){
     int nebVel {-200};
 
     //Array of nebulae
-    const int sizeOfNebulae {6};
+    //Amount of Nebula Obsticles can be regulated witht he const int below
+    const int sizeOfNebulae {3};
     AnimData nebulae[sizeOfNebulae] {};
 
     for(int i = 0; i < sizeOfNebulae; i++){
@@ -218,6 +219,11 @@ int main(){
         
         if(collision){
             //Hit a nebula, loses the game
+            DrawText("Game Over", windowDimentions[0]/4, windowDimentions[1]/2, 50, RED);
+        }
+        else if (scarfyData.pos.x >= finishLine){
+            //Scarfy has crossed the finsh line, Wins the game
+            DrawText("You Win", windowDimentions[0]/4, windowDimentions[1]/2, 50, GREEN);
         }
         else{
             //No collition detected, continue drawing the texture

@@ -1,6 +1,13 @@
 #include "raylib.h"
 #include "raymath.h"
 
+class Charecter{
+public:
+
+private:
+
+};
+
 int main(){
 
     //Setting the window Dimentions

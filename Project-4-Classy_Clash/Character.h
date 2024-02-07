@@ -9,6 +9,7 @@ public:
 
     void setScreenPos(int winWidth, int winHeight);
     void tick(float deltaTime);
+    void undoMovement();
 
 private:
     //Getting Textures
@@ -18,6 +19,8 @@ private:
 
     Vector2 screenPos {};
     Vector2 worldPos {};
+
+    Vector2 worldPosLastFrame {};
 
     // 1: facing right, -1: facing left
     float rightLeft{1.0f};
